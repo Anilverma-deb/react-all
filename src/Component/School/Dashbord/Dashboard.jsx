@@ -9,6 +9,7 @@ import {
 import { addStudent, updateStudent, deleteStudent, dashboardCards,  } from "../../../assets/js/main.js";
 import './Dashboard.css';
 import Chart from "./chart.jsx";
+import Performance from "./Performance.jsx";
 
 const iconMap = {
   "Students": Users,
@@ -322,7 +323,140 @@ function Dashboard() {
     {/* Graph */}
 <Chart></Chart>
 </div>
+
+ {/* // Notifications */}
+ <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+  <div className="lg:col-span-4 col-span-12">
+   <div className="weekly-schedule">
+  <h1>Weekly Schedule</h1>
+  <div className="calendar">
+    <div className="day-and-activity activity-one">
+      <div className="day">
+        <h1>13</h1>
+        <p>mon</p>
+      </div>
+      <div className="activity">
+        <h2>Swimming</h2>
+        <div className="participants">
+          <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/c61daa1c-5881-43f8-a50f-62be3d235daf" alt="" />
+          <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/90affa88-8da0-40c8-abe7-f77ea355a9de" alt="" />
+          <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/07d4fa6f-6559-4874-b912-3968fdfe4e5e" alt="" />
+          <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/e082b965-bb88-4192-bce6-0eb8b0bf8e68" alt="" />
+        </div>
+      </div>
+      <button className="btn">Join</button>
     </div>
+
+    <div className="day-and-activity activity-two">
+      <div className="day">
+        <h1>15</h1>
+        <p>wed</p>
+      </div>
+      <div className="activity">
+        <h2>Yoga</h2>
+        <div className="participants">
+          <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/c61daa1c-5881-43f8-a50f-62be3d235daf" alt="" />
+          <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/32037044-f076-433a-8a6e-9b80842f29c9" alt="" />
+        </div>
+      </div>
+      <button className="btn">Join</button>
+    </div>
+
+    <div className="day-and-activity activity-three">
+      <div className="day">
+        <h1>17</h1>
+        <p>fri</p>
+      </div>
+      <div className="activity">
+        <h2>Tennis</h2>
+        <div className="participants">
+          <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/32037044-f076-433a-8a6e-9b80842f29c9" alt="" />
+          <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/e082b965-bb88-4192-bce6-0eb8b0bf8e68" alt="" />
+          <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/c61daa1c-5881-43f8-a50f-62be3d235daf" alt="" />
+        </div>
+      </div>
+      <button className="btn">Join</button>
+    </div>
+
+    <div className="day-and-activity activity-four">
+      <div className="day">
+        <h1>18</h1>
+        <p>sat</p>
+      </div>
+      <div className="activity">
+        <h2>Hiking</h2>
+        <div className="participants">
+          <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/07d4fa6f-6559-4874-b912-3968fdfe4e5e" alt="" />
+          <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/32037044-f076-433a-8a6e-9b80842f29c9" alt="" />
+          <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/07d4fa6f-6559-4874-b912-3968fdfe4e5e" alt="" />
+          <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/c61daa1c-5881-43f8-a50f-62be3d235daf" alt="" />
+          <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/90affa88-8da0-40c8-abe7-f77ea355a9de" alt="" />
+        </div>
+      </div>
+      <button className="btn">Join</button>
+    </div>
+    <div className="day-and-activity activity-two">
+      <div className="day">
+        <h1>15</h1>
+        <p>wed</p>
+      </div>
+      <div className="activity">
+        <h2>Yoga</h2>
+        <div className="participants">
+          <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/c61daa1c-5881-43f8-a50f-62be3d235daf" alt="" />
+          <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/32037044-f076-433a-8a6e-9b80842f29c9" alt="" />
+        </div>
+      </div>
+      <button className="btn">Join</button>
+    </div>
+
+    <div className="day-and-activity activity-three">
+      <div className="day">
+        <h1>17</h1>
+        <p>fri</p>
+      </div>
+      <div className="activity">
+        <h2>Tennis</h2>
+        <div className="participants">
+          <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/32037044-f076-433a-8a6e-9b80842f29c9" alt="" />
+          <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/e082b965-bb88-4192-bce6-0eb8b0bf8e68" alt="" />
+          <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/c61daa1c-5881-43f8-a50f-62be3d235daf" alt="" />
+        </div>
+      </div>
+      <button className="btn">Join</button>
+    </div>
+
+    <div className="day-and-activity activity-four">
+      <div className="day">
+        <h1>18</h1>
+        <p>sat</p>
+      </div>
+      <div className="activity">
+        <h2>Hiking</h2>
+        <div className="participants">
+          <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/07d4fa6f-6559-4874-b912-3968fdfe4e5e" alt="" />
+          <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/32037044-f076-433a-8a6e-9b80842f29c9" alt="" />
+          <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/07d4fa6f-6559-4874-b912-3968fdfe4e5e" alt="" />
+          <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/c61daa1c-5881-43f8-a50f-62be3d235daf" alt="" />
+          <img src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/90affa88-8da0-40c8-abe7-f77ea355a9de" alt="" />
+        </div>
+      </div>
+      <button className="btn">Join</button>
+    </div>
+  </div>
+</div>
+
+  </div>
+
+  <div className="lg:col-span-8 col-span-12">
+<Performance></Performance>
+  </div>
+</div>
+
+
+    </div>
+    
+   
   );
 }
 

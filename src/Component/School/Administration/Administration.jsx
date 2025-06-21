@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Search, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Search, ChevronLeft, ChevronRight, Users, BookOpen, DollarSign, Activity } from 'lucide-react';
 import "../../../assets/css/Administration.css"
+import { utcYear } from 'd3';
+
 const AdministrationDashboard = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(27);
@@ -74,6 +76,16 @@ const AdministrationDashboard = () => {
     { month: 'Dec', value: 700 }
   ];
 
+  // New data for analytics section
+  const attendanceData = [
+    { day: 'Mon', present: 85, absent: 15 },
+    { day: 'Tue', present: 90, absent: 10 },
+    { day: 'Wed', present: 80, absent: 20 },
+    { day: 'Thu', present: 95, absent: 5 },
+    { day: 'Fri', present: 75, absent: 25 },
+    { day: 'Sat', present: 70, absent: 30 }
+  ];
+
   const ProgressCircle = ({ percentage, color, label, size = 120 }) => {
     const radius = 45;
     const circumference = 2 * Math.PI * radius;
@@ -114,10 +126,88 @@ const AdministrationDashboard = () => {
     );
   };
 
+  // New component for bar chart
+  const BarChart = ({ data, width = 500, height = 200 }) => {
+    const maxValue = Math.max(...data.map(item => Math.max(item.present, item.absent)));
+    
+    return (
+      <div className="chart-container" style={{ width: `${width}px`, height: `${height}px` }}>
+        <div className="chart-title">Weekly Attendance</div>
+        <div className="chart-legend">
+          <div className="legend-item">
+            <span className="legend-color present"></span>
+            <span>Present (%)</span>
+          </div>
+          <div className="legend-item">
+            <span className="legend-color absent"></span>
+            <span>Absent (%)</span>
+          </div>
+        </div>
+        <div className="chart-bars">
+          {data.map((item, index) => (
+            <div key={index} className="bar-group">
+              <div className="bar-label">{item.day}</div>
+              <div className="bars">
+                <div 
+                  className="bar present" 
+                  style={{ height: `${(item.present / maxValue) * 80}%` }}
+                ></div>
+                <div 
+                  className="bar absent" 
+                  style={{ height: `${(item.absent / maxValue) * 80}%` }}
+                ></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  // New component for line chart
+  const LineChart = ({ data, width = 500, height = 200 }) => {
+    const maxValue = Math.max(...data.map(item => item.value));
+    
+    return (
+      <div className="chart-container" style={{ width: `${width}px`, height: `${height}px` }}>
+        <div className="chart-title">Monthly Revenue (in thousands)</div>
+        <div className="chart-grid">
+          <div className="chart-line-container">
+            {data.map((item, index) => (
+              <div 
+                key={index}
+                className="chart-point"
+                style={{
+                  left: `${(index / (data.length - 1)) * 100}%`,
+                  bottom: `${(item.value / maxValue) * 100}%`
+                }}
+              ></div>
+            ))}
+            <div className="chart-line">
+              {data.map((item, index) => (
+                <div 
+                  key={index}
+                  className="line-segment"
+                  style={{
+                    left: `${(index / (data.length - 1)) * 100}%`,
+                    height: `${(item.value / maxValue) * 100}%`
+                  }}
+                ></div>
+              ))}
+            </div>
+          </div>
+          <div className="chart-labels">
+            {data.map((item, index) => (
+              <div key={index} className="chart-label">{item.month}</div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="dashboard">
-    
-
       {/* Header */}
       <div className="header">
         <h1>Administration Dashboard</h1>
@@ -136,18 +226,22 @@ const AdministrationDashboard = () => {
         <div className="stat-card blue">
           <div className="stat-number">3256</div>
           <div className="stat-label">Students</div>
+          <Users className="stat-icon" size={24} />
         </div>
         <div className="stat-card purple">
           <div className="stat-number">250</div>
           <div className="stat-label">Faculties</div>
+          <Users className="stat-icon" size={24} />
         </div>
         <div className="stat-card green">
           <div className="stat-number">150</div>
           <div className="stat-label">Courses</div>
+          <BookOpen className="stat-icons " size={24} />
         </div>
         <div className="stat-card orange">
           <div className="stat-number">3,47,500</div>
           <div className="stat-label">Revenue</div>
+          <DollarSign className="stat-icon" size={24} />
         </div>
       </div>
 
@@ -192,7 +286,9 @@ const AdministrationDashboard = () => {
               <button className="nav-button">
                 <ChevronLeft size={16} />
               </button>
-              <span className="month-year">June 2024</span>
+              <span className="month-year" key={new Date().getFullYear()}>
+                {new Date().getFullYear()}
+              </span>
               <button className="nav-button">
                 <ChevronRight size={16} />
               </button>
@@ -221,7 +317,63 @@ const AdministrationDashboard = () => {
         </div>
       </div>
 
-    
+      {/* New Analytics Section */}
+      <div className="analytics-section">
+        {/* <h2 className="section-title">Statistics & Analytics</h2> */}
+        
+        {/* <div className="analytics-grid"> */}
+          {/* <div className="analytics-card">
+            <div className="card-header">
+              <Activity size={20} />
+              <h3>Attendance Overview</h3>
+            </div>
+            <BarChart data={attendanceData} />
+          </div> */}
+          
+          {/* <div className="analytics-card">
+            <div className="card-header">
+              <DollarSign size={20} />
+              <h3>Revenue Trend</h3>
+            </div>
+            <LineChart data={revenueData} />
+          </div> */}
+        {/* </div> */}
+        
+        <div className="summary-cards">
+          <div className="summary-card">
+            <div className="summary-icon">
+              <Users size={24} />
+            </div>
+            <div className="summary-content">
+              <h4>New Students This Month</h4>
+              <p className="summary-value">142</p>
+              <p className="summary-change positive">↑ 12% from last month</p>
+            </div>
+          </div>
+          
+          <div className="summary-card bg-change">
+            <div className="summary-icon">
+              <DollarSign size={24} />
+            </div>
+            <div className="summary-content  ">
+              <h4>Monthly Revenue</h4>
+              <p className="summary-value">₹2,85,000</p>
+              <p className="summary-change positive">↑ 8% from last month</p>
+            </div>
+          </div>
+          
+          <div className="summary-card bg-changs">
+            <div className="summary-icon">
+              <BookOpen size={24} />
+            </div>
+            <div className="summary-content">
+              <h4>Courses Completed</h4>
+              <p className="summary-value">38</p>
+              <p className="summary-change negative">↓ 5% from last month</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route, NavLink, Navigate } from 'react-router-dom';
-import '../assets/css/College.css';
-import Dashboard from './College/Dashbord/Dashboard';
-import Feemanagement from './College/Dashbord/fee-management';
-import Administration from './College/Dashbord/Administration';
+import '../assets/css/School.css';
+import Dashboard from './School/Dashbord/Dashboard';
+import Feemanagement from './School/Fee-management/fee-management';
+import Administration from './School/Administration/Administration';
+import TimeTable from './School/Time-table/Time-Table';
 
 
 // const Administration = () => <div className="page-content">Administration Component</div>;
 const Announcement = () => <div className="page-content">Announcement Component</div>;
 const Event = () => <div className="page-content">Event Component</div>;
 const Communication = () => <div className="page-content">Communication Component</div>;
-const TimeTable = () => <div className="page-content">Time Table Component</div>;
+// const TimeTable = () => <div className="page-content">Time Table Component</div>;
 const StudentTracking = () => <div className="page-content">Student Tracking Component</div>;
 const Transport = () => <div className="page-content">Transport Component</div>;
 const EmployeeManagement = () => <div className="page-content">Employee Management Component</div>;
 
-function College() {
+function School() {
 
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isMessageOpen, setIsMessageOpen] = useState(false);
@@ -120,16 +121,16 @@ function College() {
   ];
 
   const navItems = [
-    { path: '/college/dashboard', icon: 'home-outline', title: 'Dashboard' },
-    { path: '/college/administration', icon: 'people-outline', title: 'Administration' },
-    { path: '/college/announcement', icon: 'megaphone-outline', title: 'Announcement' },
-    { path: '/college/event', icon: 'calendar-outline', title: 'Events' },
-    { path: '/college/communication', icon: 'chatbox-ellipses-outline', title: 'Communication' },
-    { path: '/college/timetable', icon: 'time-outline', title: 'Timetable' },
-    { path: '/college/student-tracking', icon: 'walk-outline', title: 'Student Tracking' },
-    { path: '/college/transport', icon: 'bus-outline', title: 'Transport' },
-    { path: '/college/fee-management', icon: 'card-outline', title: 'Fee Management' },
-    { path: '/college/employee', icon: 'person-outline', title: 'Employee Management' }
+    { path: '/School/dashboard', icon: 'home-outline', title: 'Dashboard' },
+    { path: '/School/administration', icon: 'people-outline', title: 'Administration' },
+    { path: '/School/announcement', icon: 'megaphone-outline', title: 'Announcement' },
+    { path: '/School/event', icon: 'calendar-outline', title: 'Events' },
+    { path: '/School/communication', icon: 'chatbox-ellipses-outline', title: 'Communication' },
+    { path: '/School/timetable', icon: 'time-outline', title: 'Timetable' },
+    { path: '/School/student-tracking', icon: 'walk-outline', title: 'Student Tracking' },
+    { path: '/School/transport', icon: 'bus-outline', title: 'Transport' },
+    { path: '/School/fee-management', icon: 'card-outline', title: 'Fee Management' },
+    { path: '/School/employee', icon: 'person-outline', title: 'Employee Management' }
   ];
  useEffect(() => {
     const handleScroll = () => {
@@ -357,7 +358,7 @@ function College() {
         {/* Content Area */}
         <div className="content-area">
           <Routes>
-            <Route index element={<Navigate to="/college/dashboard" replace />} />
+            <Route index element={<Navigate to="/School/dashboard" replace />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="administration" element={<Administration />} />
             <Route path="announcement" element={<Announcement />} />
@@ -368,7 +369,7 @@ function College() {
             <Route path="transport" element={<Transport />} />
             <Route path="fee-management" element={<Feemanagement />} />
             <Route path="employee" element={<EmployeeManagement />} />
-            <Route path="*" element={<Navigate to="/college/dashboard" replace />} />
+            <Route path="*" element={<Navigate to="/School/dashboard" replace />} />
           </Routes>
         </div>
       </div>
@@ -376,4 +377,4 @@ function College() {
   );
 }
 
-export default College;
+export default School;

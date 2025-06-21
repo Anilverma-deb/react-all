@@ -4,7 +4,7 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    color: #333;
+    /* color: #333; */
   }
   
   .dashboard-header {
@@ -15,6 +15,8 @@
 
   }
 
+  
+
   .dashboard-title {
     font-size: 28px;
     font-weight: 700;
@@ -24,12 +26,12 @@
   
   .dashboard-header h1 {
     font-size: 2.2rem;
-    color: hwb(210 95% 4%);
+    /* color: hwb(210 95% 4%); */
     margin-bottom: 10px;
   }
   
   .dashboard-header p {
-    color: hsl(180, 9%, 94%);
+    /* color: hsl(180, 9%, 94%); */
     font-size: 1.1rem;
     padding-bottom:10px;
   }
