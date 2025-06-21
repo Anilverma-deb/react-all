@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronDown, MoreHorizontal, Download, RefreshCw, Eye, Trophy, Medal, Award } from 'lucide-react';
-import './performance.css'
+import './Performance.css'
 const Performance = () => {
   const [selectedSemester, setSelectedSemester] = useState('Fall 2024');
   const [showDropdown, setShowDropdown] = useState(false);
