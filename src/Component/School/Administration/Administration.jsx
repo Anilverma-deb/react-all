@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Search, ChevronLeft, ChevronRight, Users, BookOpen, DollarSign, Activity } from 'lucide-react';
-import "../../../assets/css/Administration.css"
+import "../../../assets/css/administration.css"
 import { utcYear } from 'd3';
   
 const AdministrationDashboard = () => {
