@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from 'react';
-<<<<<<< HEAD:src/Component/School/Administration/Administration.jsx
 import { Search, ChevronLeft, ChevronRight, Users, BookOpen, DollarSign, Activity } from 'lucide-react';
 import "../../../assets/css/Administration.css"
 import { utcYear } from 'd3';
-
-=======
-import { Search, ChevronLeft, ChevronRight } from 'lucide-react';
-import "../../../assets/css/administration.css"
->>>>>>> 01621ddc10be69f0c2d8a50e19911a709bf0bb52:src/Component/College/Dashbord/Administration.jsx
+  
 const AdministrationDashboard = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(27);
