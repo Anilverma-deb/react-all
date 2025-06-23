@@ -22,14 +22,25 @@ const TimetableDashboard = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
   const [showNotifications, setShowNotifications] = useState(false);
   const [showSettingsMenu, setShowSettingsMenu] = useState(false);
+  const [selectedTeacher, setSelectedTeacher] = useState('');
 
   // State for teacher management
+  const [subjects, setSubjects] = useState([
+    { id: 1, name: 'Hindi' },
+    { id: 2, name: 'English' },
+    { id: 3, name: 'Math' },
+    { id: 4, name: 'History' },
+    { id: 5, name: 'Polity'}
+  ]);
+  const [showSubjectModal, setShowSubjectModal] = useState(false);
+  const [currentSubject, setCurrentSubject] = useState({ id: '', name: ''});
+
   const [teachers, setTeachers] = useState([
-    { id: 1, name: 'Mr. Sharma', email: 'sharma@school.com', subjects: ['Mathematics', 'Physics'], maxPeriods: 30 },
-    { id: 2, name: 'Ms. Gupta', email: 'gupta@school.com', subjects: ['Chemistry', 'Biology'], maxPeriods: 28 },
-    { id: 3, name: 'Dr. Singh', email: 'singh@school.com', subjects: ['English', 'History'], maxPeriods: 25 },
-    { id: 4, name: 'Mrs. Patel', email: 'patel@school.com', subjects: ['Hindi', 'Sanskrit'], maxPeriods: 26 },
-    { id: 5, name: 'Mr. Kumar', email: 'kumar@school.com', subjects: ['Computer Science', 'Mathematics'], maxPeriods: 32 }
+    { id: 1, name: 'Mr. Sharma', email: 'sharma@school.com', subjects: ['Hindi', 'English'], maxPeriods: 30 },
+    { id: 2, name: 'Ms. Gupta', email: 'gupta@school.com', subjects: ['English', 'Polity'], maxPeriods: 28 },
+    { id: 3, name: 'Dr. Singh', email: 'singh@school.com', subjects: ['Polity', 'English'], maxPeriods: 25 },
+    { id: 4, name: 'Mrs. Patel', email: 'patel@school.com', subjects: ['Hindi', 'Polity'], maxPeriods: 26 },
+    { id: 5, name: 'Mr. Kumar', email: 'kumar@school.com', subjects: ['English', 'Mathematics'], maxPeriods: 32 }
   ]);
   const [showTeacherModal, setShowTeacherModal] = useState(false);
   const [currentTeacher, setCurrentTeacher] = useState({ id: '', name: '', email: '', subjects: [], maxPeriods: 30 });
@@ -48,7 +59,6 @@ const TimetableDashboard = () => {
 
   // Sample data
   const classes = ['10-A', '10-B', '11-A', '11-B', '12-A', '12-B'];
-  const subjects = ['Mathematics', 'Physics', 'Chemistry', 'Biology', 'English', 'Hindi', 'History', 'Computer Science', 'Sanskrit'];
   const timeSlots = ['9:00-9:45', '9:45-10:30', '10:45-11:30', '11:30-12:15', '1:00-1:45', '1:45-2:30', '2:30-3:15'];
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
@@ -144,7 +154,7 @@ const TimetableDashboard = () => {
   };
 
   const subjectAllocationData = {
-    labels: subjects,
+    labels: subjects.map(s => s.name),
     datasets: [
       {
         data: subjects.map(() => Math.floor(Math.random() * 20) + 5), // Random data for demo
@@ -204,6 +214,36 @@ const TimetableDashboard = () => {
     });
   };
 
+  // Subject management functions
+  const handleAddSubject = () => {
+    setCurrentSubject({ id: '', name: '' });
+    setShowSubjectModal(true);
+  };
+
+  const handleEditSubject = (subject) => {
+    setCurrentSubject({ ...subject });
+    setShowSubjectModal(true);
+  };
+
+  const handleDeleteSubject = (id) => {
+    setSubjects(subjects.filter(s => s.id !== id));
+  };
+
+  const handleSaveSubject = () => {
+    if (currentSubject.id) {
+      // Update existing subject
+      setSubjects(subjects.map(s => s.id === currentSubject.id ? currentSubject : s));
+    } else {
+      // Add new subject
+      const newSubject = {
+        ...currentSubject,
+        id: Math.max(...subjects.map(s => s.id), 0) + 1
+      };
+      setSubjects([...subjects, newSubject]);
+    }
+    setShowSubjectModal(false);
+  };
+
   // Room management functions
   const handleAddRoom = () => {
     setCurrentRoom({ id: '', name: '', capacity: 30, type: 'Classroom' });
@@ -234,54 +274,211 @@ const TimetableDashboard = () => {
     setShowRoomModal(false);
   };
 
+  // Get teacher's timetable
+  const getTeacherTimetable = (teacherName) => {
+    const teacherTimetable = {};
+    
+    days.forEach(day => {
+      teacherTimetable[day] = [];
+      
+      timeSlots.forEach((timeSlot, timeIndex) => {
+        let foundPeriod = null;
+        
+        // Check all classes for this teacher's periods
+        Object.keys(timetableData).forEach(className => {
+          const daySchedule = timetableData[className][day];
+          if (daySchedule && daySchedule[timeIndex] && daySchedule[timeIndex].teacher === teacherName) {
+            foundPeriod = {
+              ...daySchedule[timeIndex],
+              className: className,
+              timeSlot: timeSlot
+            };
+          }
+        });
+        
+        teacherTimetable[day].push(foundPeriod || { subject: '', teacher: '', room: '' });
+      });
+    });
+    
+    return teacherTimetable;
+  };
+
   // Enhanced timetable rendering with teacher and room info
   const renderTimetableGrid = () => {
-    const data = timetableData[selectedClass] || {};
-    
-    return (
-      <div className="tt-grid-container">
-        <div className="tt-grid-header">
-          <div className="tt-time-slot-header">Time</div>
-          {days.map(day => (
-            <div key={day} className="tt-day-header">{day}</div>
+    if (viewMode === 'teacher' && selectedTeacher) {
+      const teacherTimetable = getTeacherTimetable(selectedTeacher);
+      
+      return (
+        <div className="tt-grid-container">
+          <div className="tt-grid-header">
+            <div className="tt-time-slot-header">Time</div>
+            {days.map(day => (
+              <div key={day} className="tt-day-header">{day}</div>
+            ))}
+          </div>
+          
+          {timeSlots.map((timeSlot, timeIndex) => (
+            <div key={timeSlot} className="tt-grid-row">
+              <div className="tt-time-slot">{timeSlot}</div>
+              {days.map(day => {
+                const period = teacherTimetable[day][timeIndex];
+                const isEmpty = !period || !period.subject;
+                
+                return (
+                  <div 
+                    key={`${day}-${timeIndex}`}
+                    className={`tt-period-cell ${isEmpty ? 'tt-empty-cell' : ''}`}
+                    onClick={() => setSelectedPeriod({day, timeIndex, ...period, timeSlot})}
+                  >
+                    {!isEmpty ? (
+                      <>
+                        <div className="tt-subject-name">{period.subject}</div>
+                        <div className="tt-class-name">{period.className}</div>
+                        <div className="tt-room-number">{period.room}</div>
+                      </>
+                    ) : (
+                      <div className="tt-subject-name">Free</div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           ))}
         </div>
-        
-        {timeSlots.map((timeSlot, timeIndex) => (
-          <div key={timeSlot} className="tt-grid-row">
-            <div className="tt-time-slot">{timeSlot}</div>
-            {days.map(day => {
-              const period = data[day] && data[day][timeIndex];
-              const isBreak = period?.subject === 'Break' || period?.subject === 'Lunch';
-              const isEmpty = !period || period?.subject === 'Free';
-              
-              return (
-                <div 
-                  key={`${day}-${timeIndex}`}
-                  className={`tt-period-cell ${isBreak ? 'tt-break-cell' : ''} ${isEmpty ? 'tt-empty-cell' : ''}`}
-                  onClick={() => setSelectedPeriod({day, timeIndex, ...period, timeSlot})}
-                >
-                  {period ? (
-                    <>
-                      <div className="tt-subject-name">{period.subject || 'Free'}</div>
-                      {!isBreak && !isEmpty && (
-                        <>
-                          <div className="tt-teacher-name">{period.teacher}</div>
-                          <div className="tt-room-number">{period.room}</div>
-                        </>
-                      )}
-                    </>
-                  ) : (
-                    <div className="tt-subject-name">Free</div>
-                  )}
-                </div>
-              );
-            })}
+      );
+    } else {
+      const data = timetableData[selectedClass] || {};
+      
+      return (
+        <div className="tt-grid-container">
+          <div className="tt-grid-header">
+            <div className="tt-time-slot-header">Time</div>
+            {days.map(day => (
+              <div key={day} className="tt-day-header">{day}</div>
+            ))}
           </div>
-        ))}
-      </div>
-    );
+          
+          {timeSlots.map((timeSlot, timeIndex) => (
+            <div key={timeSlot} className="tt-grid-row">
+              <div className="tt-time-slot">{timeSlot}</div>
+              {days.map(day => {
+                const period = data[day] && data[day][timeIndex];
+                const isBreak = period?.subject === 'Break' || period?.subject === 'Lunch';
+                const isEmpty = !period || period?.subject === 'Free';
+                
+                return (
+                  <div 
+                    key={`${day}-${timeIndex}`}
+                    className={`tt-period-cell ${isBreak ? 'tt-break-cell' : ''} ${isEmpty ? 'tt-empty-cell' : ''}`}
+                    onClick={() => setSelectedPeriod({day, timeIndex, ...period, timeSlot})}
+                  >
+                    {period ? (
+                      <>
+                        <div className="tt-subject-name">{period.subject || 'Free'}</div>
+                        {!isBreak && !isEmpty && (
+                          <>
+                            <div className="tt-teacher-name">{period.teacher}</div>
+                            <div className="tt-room-number">{period.room}</div>
+                          </>
+                        )}
+                      </>
+                    ) : (
+                      <div className="tt-subject-name">Free</div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+      );
+    }
   };
+
+  // Subject management modal
+  const renderSubjectModal = () => (
+    <div className="tt-modal-overlay" onClick={() => setShowSubjectModal(false)}>
+      <div className="tt-modal-content" onClick={(e) => e.stopPropagation()}>
+        <div className="tt-modal-header">
+          <h3>{currentSubject.id ? 'Edit Subject' : 'Add New Subject'}</h3>
+          <button className="tt-close-btn" onClick={() => setShowSubjectModal(false)}>
+            ×
+          </button>
+        </div>
+        
+        <div className="tt-modal-body">
+          <div className="tt-form-group">
+            <label>Subject Name:</label>
+            <input 
+              type="text" 
+              value={currentSubject.name}
+              onChange={(e) => setCurrentSubject({...currentSubject, name: e.target.value})}
+              placeholder="Enter subject name"
+            />
+          </div>
+        </div>
+        
+        <div className="tt-modal-footer">
+          <button className="tt-btn-secondary" onClick={() => setShowSubjectModal(false)}>
+            Cancel
+          </button>
+          <button className="tt-btn-primary" onClick={handleSaveSubject}>
+            <Save size={16} /> Save Subject
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
+  // Subjects list component
+  const renderSubjectsList = () => (
+    <div className="tt-subjects-list-container">
+      <div className="tt-content-header">
+        <h2>Subject Management</h2>
+        <div className="tt-action-buttons">
+          <button className="tt-btn-secondary" onClick={() => setActiveTab('teachers')}>
+            Manage Teachers
+          </button>
+          <button className="tt-btn-primary" onClick={handleAddSubject}>
+            <Plus /> Add Subject
+          </button>
+        </div>
+      </div>
+      
+      <div className="tt-subjects-table">
+        <div className="tt-table-header">
+          <div className="tt-table-row">
+            <div className="tt-table-cell">ID</div>
+            <div className="tt-table-cell">Name</div>
+            <div className="tt-table-cell">Actions</div>
+          </div>
+        </div>
+        
+        <div className="tt-table-body">
+          {subjects.map(subject => (
+            <div key={subject.id} className="tt-table-row">
+              <div className="tt-table-cell">{subject.id}</div>
+              <div className="tt-table-cell">{subject.name}</div>
+              <div className="tt-table-cell tt-actions-cell">
+                <button 
+                  className="tt-btn-icon"
+                  onClick={() => handleEditSubject(subject)}
+                >
+                  <Edit size={16} />
+                </button>
+                <button 
+                  className="tt-btn-icon tt-danger"
+                  onClick={() => handleDeleteSubject(subject.id)}
+                >
+                  <Trash2 size={16} />
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 
   // Teacher management modal
   const renderTeacherModal = () => (
@@ -334,7 +531,7 @@ const TimetableDashboard = () => {
               >
                 <option value="">Select a subject</option>
                 {subjects.map(subject => (
-                  <option key={subject} value={subject}>{subject}</option>
+                  <option key={subject.id} value={subject.name}>{subject.name}</option>
                 ))}
               </select>
               <button 
@@ -707,7 +904,7 @@ const TimetableDashboard = () => {
               <select defaultValue={selectedPeriod?.subject || ''}>
                 <option value="">Select a subject</option>
                 {subjects.map(subject => (
-                  <option key={subject} value={subject}>{subject}</option>
+                  <option key={subject.id} value={subject.name}>{subject.name}</option>
                 ))}
               </select>
             </div>
@@ -717,7 +914,7 @@ const TimetableDashboard = () => {
               <select defaultValue={selectedPeriod?.teacher || ''}>
                 <option value="">Select a teacher</option>
                 {teachers.map(teacher => (
-                  <option key={teacher.name} value={teacher.name}>{teacher.name}</option>
+                  <option key={teacher.id} value={teacher.name}>{teacher.name}</option>
                 ))}
               </select>
             </div>
@@ -727,7 +924,7 @@ const TimetableDashboard = () => {
               <select defaultValue={selectedPeriod?.room || ''}>
                 <option value="">Select a room</option>
                 {rooms.map(room => (
-                  <option key={room.name} value={room.name}>{room.name}</option>
+                  <option key={room.id} value={room.name}>{room.name}</option>
                 ))}
               </select>
             </div>
@@ -860,6 +1057,12 @@ const TimetableDashboard = () => {
           <Calendar /> Timetable
         </button>
         <button 
+          className={`tt-tab ${activeTab === 'subject' ? 'tt-active' : ''}`}
+          onClick={() => setActiveTab('subject')}
+        >
+          <BookOpen /> Subjects
+        </button>
+        <button 
           className={`tt-tab ${activeTab === 'teachers' ? 'tt-active' : ''}`}
           onClick={() => setActiveTab('teachers')}
         >
@@ -955,14 +1158,31 @@ const TimetableDashboard = () => {
             {/* Filters and Actions */}
             <div className="tt-content-header">
               <div className="tt-filters-section">
-                <div className="tt-filter-group">
-                  <label>Class:</label>
-                  <select value={selectedClass} onChange={(e) => setSelectedClass(e.target.value)}>
-                    {classes.map(cls => (
-                      <option key={cls} value={cls}>{cls}</option>
-                    ))}
-                  </select>
-                </div>
+                {viewMode !== 'teacher' && (
+                  <div className="tt-filter-group">
+                    <label>Class:</label>
+                    <select value={selectedClass} onChange={(e) => setSelectedClass(e.target.value)}>
+                      {classes.map(cls => (
+                        <option key={cls} value={cls}>{cls}</option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+                
+                {viewMode === 'teacher' && (
+                  <div className="tt-filter-group">
+                    <label>Teacher:</label>
+                    <select 
+                      value={selectedTeacher} 
+                      onChange={(e) => setSelectedTeacher(e.target.value)}
+                    >
+                      <option value="">Select Teacher</option>
+                      {teachers.map(teacher => (
+                        <option key={teacher.id} value={teacher.name}>{teacher.name}</option>
+                      ))}
+                    </select>
+                  </div>
+                )}
                 
                 <div className="tt-filter-group">
                   <label>Week:</label>
@@ -975,7 +1195,15 @@ const TimetableDashboard = () => {
                 
                 <div className="tt-filter-group">
                   <label>View:</label>
-                  <select value={viewMode} onChange={(e) => setViewMode(e.target.value)}>
+                  <select 
+                    value={viewMode} 
+                    onChange={(e) => {
+                      setViewMode(e.target.value);
+                      if (e.target.value !== 'teacher') {
+                        setSelectedTeacher('');
+                      }
+                    }}
+                  >
                     <option value="weekly">Weekly View</option>
                     <option value="daily">Daily View</option>
                     <option value="teacher">Teacher View</option>
@@ -1006,19 +1234,35 @@ const TimetableDashboard = () => {
             {/* Timetable Grid */}
             <div className="tt-timetable-container">
               <div className="tt-timetable-header">
-                <h2>Class {selectedClass} - Weekly Timetable</h2>
+                <h2>
+                  {viewMode === 'teacher' && selectedTeacher 
+                    ? `${selectedTeacher}'s Weekly Timetable` 
+                    : `Class ${selectedClass} - Weekly Timetable`}
+                </h2>
                 <div className="tt-view-controls">
                   <button 
                     className={viewMode === 'weekly' ? 'tt-active' : ''}
-                    onClick={() => setViewMode('weekly')}
+                    onClick={() => {
+                      setViewMode('weekly');
+                      setSelectedTeacher('');
+                    }}
                   >
                     Weekly
                   </button>
                   <button 
                     className={viewMode === 'daily' ? 'tt-active' : ''}
-                    onClick={() => setViewMode('daily')}
+                    onClick={() => {
+                      setViewMode('daily');
+                      setSelectedTeacher('');
+                    }}
                   >
                     Daily
+                  </button>
+                  <button 
+                    className={viewMode === 'teacher' ? 'tt-active' : ''}
+                    onClick={() => setViewMode('teacher')}
+                  >
+                    Teacher
                   </button>
                 </div>
               </div>
@@ -1027,16 +1271,15 @@ const TimetableDashboard = () => {
           </>
         )}
 
+        {activeTab === 'subject' && renderSubjectsList()}
         {activeTab === 'teachers' && renderTeachersList()}
-
         {activeTab === 'rooms' && renderRoomsList()}
-
         {activeTab === 'analytics' && renderAnalyticsCharts()}
-
         {activeTab === 'settings' && renderSettings()}
       </main>
 
       {/* Modals */}
+      {showSubjectModal && renderSubjectModal()}
       {showTeacherModal && renderTeacherModal()}
       {showRoomModal && renderRoomModal()}
       {renderPeriodModal()}

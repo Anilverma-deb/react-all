@@ -5,10 +5,12 @@ import Dashboard from './School/Dashbord/Dashboard';
 import Feemanagement from './School/Fee-management/fee-management';
 import Administration from './School/Administration/Administration';
 import TimeTable from './School/Time-table/Time-Table';
+import Announcement from './School/Attendance/Attendance';
+
 
 
 // const Administration = () => <div className="page-content">Administration Component</div>;
-const Announcement = () => <div className="page-content">Announcement Component</div>;
+// const Announcement = () => <div className="page-content">Announcement Component</div>;
 const Event = () => <div className="page-content">Event Component</div>;
 const Communication = () => <div className="page-content">Communication Component</div>;
 // const TimeTable = () => <div className="page-content">Time Table Component</div>;
