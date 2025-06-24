@@ -6,16 +6,20 @@ import Feemanagement from './School/Fee-management/fee-management';
 import Administration from './School/Administration/Administration';
 import TimeTable from './School/Time-table/Time-Table';
 import Announcement from './School/Attendance/Attendance';
-
+import Event from './School/Event/Event'
+import LeaveManagement from './School/Leave-Management/LeaveManagement';  // Based on your folder structure
 
 
 // const Administration = () => <div className="page-content">Administration Component</div>;
 // const Announcement = () => <div className="page-content">Announcement Component</div>;
-const Event = () => <div className="page-content">Event Component</div>;
+// const Event = () => <div className="page-content">Event Component</div>;
 const Communication = () => <div className="page-content">Communication Component</div>;
+
+// const LeaveManagement = () => <div className="page-content">Leave Management Component</div>;
+
 // const TimeTable = () => <div className="page-content">Time Table Component</div>;
 const StudentTracking = () => <div className="page-content">Student Tracking Component</div>;
-const Transport = () => <div className="page-content">Transport Component</div>;
+ const Transport = () => <div className="page-content">Transport Component</div>;
 const EmployeeManagement = () => <div className="page-content">Employee Management Component</div>;
 
 function School() {
@@ -127,6 +131,8 @@ function School() {
     { path: '/School/administration', icon: 'people-outline', title: 'Administration' },
     { path: '/School/announcement', icon: 'megaphone-outline', title: 'Announcement' },
     { path: '/School/event', icon: 'calendar-outline', title: 'Events' },
+    { path: '/School/leave-management', icon: 'home-outline', title: 'Leave Management' },
+
     { path: '/School/communication', icon: 'chatbox-ellipses-outline', title: 'Communication' },
     { path: '/School/timetable', icon: 'time-outline', title: 'Timetable' },
     { path: '/School/student-tracking', icon: 'walk-outline', title: 'Student Tracking' },
@@ -365,6 +371,7 @@ function School() {
             <Route path="administration" element={<Administration />} />
             <Route path="announcement" element={<Announcement />} />
             <Route path="event" element={<Event />} />
+            <Route path="leave-management" element={<LeaveManagement />} />   
             <Route path="communication" element={<Communication />} />
             <Route path="timetable" element={<TimeTable />} />
             <Route path="student-tracking" element={<StudentTracking />} />

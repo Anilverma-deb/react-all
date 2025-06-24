@@ -8,7 +8,7 @@
     /* color: #333; */
 }
 
-.dashboard-header {
+.dashboard-headers {
     text-align: center;
     margin-bottom: 30px;
     background-color: #2980b9 !important;
@@ -21,14 +21,14 @@
     margin: 0;
 }
 
-.dashboard-header h1 {
+.dashboard-headers h1 {
     font-size: 2.2rem;
-    /* color: hwb(210 95% 4%); */
+    color: hwb(210 95% 4%);
     margin-bottom: 10px;
 }
 
-.dashboard-header p {
-    /* color: hsl(180, 9%, 94%); */
+.dashboard-headers p {
+    color: hsl(180, 9%, 94%);
     font-size: 1.1rem;
     padding-bottom: 10px;
 }
@@ -36,14 +36,14 @@
 
 /* Stats Grid */
 
-.stats-grid {
+.stats-grids {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
     margin-bottom: 30px;
 }
 
-.stat-card {
+.stat-cards {
     background: rgb(124 105 239);
     /* Indigo to purple gradient */
     padding: 20px;
@@ -63,20 +63,20 @@
     background-color: rgb(255 193 7);
 }
 
-.stat-card h3 {
+.stat-cards h3 {
     font-size: 1rem;
     color: white;
     margin-bottom: 5px;
     font-size: 22px;
 }
 
-.stat-card p {
+.stat-cards p {
     font-size: 1.8rem;
     font-weight: bold;
     color: #f1f3f5;
 }
 
-.stat-card svg {
+.stat-cards svg {
     color: hsl(220, 33%, 98%);
 }
 
@@ -521,7 +521,7 @@ th {
 /* Responsive Adjustments */
 
 @media (max-width: 768px) {
-    .stats-grid {
+    .stats-grids {
         grid-template-columns: 1fr 1fr;
     }
     .student-details,
@@ -534,7 +534,7 @@ th {
 }
 
 @media (max-width: 480px) {
-    .stats-grid {
+    .stats-grids {
         grid-template-columns: 1fr;
     }
     .search-filter {

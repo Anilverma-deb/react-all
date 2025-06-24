@@ -468,7 +468,7 @@ const downloadFeeReceipt = (student, feeRecord) => {
   return (
     <div className="fee-dashboard">
       {/* Header */}
-      <header className="dashboard-header">
+      <header className="dashboard-headers">
         <motion.h1 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -481,13 +481,13 @@ const downloadFeeReceipt = (student, feeRecord) => {
 
       {/* Stats Cards */}
       <motion.div 
-        className="stats-grid"
+        className="stats-grids"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ staggerChildren: 0.1 }}
       >
         <motion.div 
-          className="stat-card total-students"
+          className="stat-cards total-students"
           whileHover={{ y: -5 }}
         >
           <div>
@@ -498,7 +498,7 @@ const downloadFeeReceipt = (student, feeRecord) => {
         </motion.div>
 
         <motion.div 
-          className="stat-card paid-students"
+          className="stat-cards paid-students"
           whileHover={{ y: -5 }}
         >
           <div>
@@ -509,7 +509,7 @@ const downloadFeeReceipt = (student, feeRecord) => {
         </motion.div>
 
         <motion.div 
-          className="stat-card pending-students"
+          className="stat-cards pending-students"
           whileHover={{ y: -5 }}
         >
           <div>
@@ -520,7 +520,7 @@ const downloadFeeReceipt = (student, feeRecord) => {
         </motion.div>
 
         <motion.div 
-          className="stat-card total-revenue"
+          className="stat-cards total-revenue"
           whileHover={{ y: -5 }}
         >
           <div>
