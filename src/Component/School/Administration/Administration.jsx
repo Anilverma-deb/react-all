@@ -597,21 +597,21 @@ const SchoolERP = () => {
         transition={{ duration: 0.3, delay: 0.1 }}
       >
         <button 
-          className={`nav-tab ${activeTab === 'dashboard' ? 'active' : ''}`}
+          className={`nav-tabss ${activeTab === 'dashboard' ? 'active' : ''}`}
           onClick={() => setActiveTab('dashboard')}
         >
           <Home /> <span>Dashboard</span>
         </button>
         
         <button 
-          className={`nav-tab ${activeTab === 'students' ? 'active' : ''}`}
+          className={`nav-tabss ${activeTab === 'students' ? 'active' : ''}`}
           onClick={() => setActiveTab('students')}
         >
           <Users /> <span>Students</span>
         </button>
         
         <button 
-          className={`nav-tab ${activeTab === 'teachers' ? 'active' : ''}`}
+          className={`nav-tabss ${activeTab === 'teachers' ? 'active' : ''}`}
           onClick={() => setActiveTab('teachers')}
         >
           <User /> <span>Teachers</span>
@@ -625,7 +625,7 @@ const SchoolERP = () => {
         </button>
         
         <button 
-          className={`nav-tab ${activeTab === 'settings' ? 'active' : ''}`}
+          className={`nav-tabss ${activeTab === 'settings' ? 'active' : ''}`}
           onClick={() => setActiveTab('settings')}
         >
           <Settings /> <span>Settings</span>

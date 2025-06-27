@@ -113,7 +113,7 @@
   z-index: 90;
 }
 
-.nav-tab {
+.nav-tabss {
   display: flex;
   align-items: center;
   padding: 0 20px;
@@ -132,18 +132,18 @@
 
 }
 
-.nav-tab:hover {
+.nav-tabss:hover {
   color: var(--primary-color);
   background: rgba(79, 70, 229, 0.05);
 }
 
-.nav-tab.active {
+.nav-tabss.active {
   color: var(--primary-color);
   border-bottom: 3px solid var(--primary-color);
   background: rgba(79, 70, 229, 0.05);
 }
 
-.nav-tab svg {
+.nav-tabss svg {
   width: 18px;
   height: 18px;
 }
@@ -858,7 +858,7 @@
     -webkit-overflow-scrolling: touch;
   }
   
-  .nav-tab {
+  .nav-tabss {
     padding: 0 12px;
     font-size: 0.8rem;
   }
@@ -1018,12 +1018,12 @@
 
 /* Special cases for very small screens */
 @media (max-width: 360px) {
-  .nav-tab {
+  .nav-tabss {
     padding: 0 8px;
     font-size: 0.75rem;
   }
   
-  .nav-tab svg {
+  .nav-tabss svg {
     width: 16px;
     height: 16px;
   }
