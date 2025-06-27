@@ -5,15 +5,17 @@ import Dashboard from './School/Dashbord/Dashboard';
 import Feemanagement from './School/Fee-management/fee-management';
 import Administration from './School/Administration/Administration';
 import TimeTable from './School/Time-table/Time-Table';
-import Announcement from './School/Attendance/Attendance';
 import Event from './School/Event/Event'
 import LeaveManagement from './School/Leave-Management/LeaveManagement';  // Based on your folder structure
+import Announcement from './School/Announcement/Announcement'
+import ExamManagement from './School/Exam-Management/Exam-Management'
 
 
 // const Administration = () => <div className="page-content">Administration Component</div>;
 // const Announcement = () => <div className="page-content">Announcement Component</div>;
 // const Event = () => <div className="page-content">Event Component</div>;
 const Communication = () => <div className="page-content">Communication Component</div>;
+// const ExamManagement = () => <div className="page-content">ExamManagement Component</div>;
 
 // const LeaveManagement = () => <div className="page-content">Leave Management Component</div>;
 
@@ -132,7 +134,7 @@ function School() {
     { path: '/School/announcement', icon: 'megaphone-outline', title: 'Announcement' },
     { path: '/School/event', icon: 'calendar-outline', title: 'Events' },
     { path: '/School/leave-management', icon: 'home-outline', title: 'Leave Management' },
-
+    { path: '/School/exam-management', icon: 'chatbox-ellipses-outline', title: 'Exam Management' },
     { path: '/School/communication', icon: 'chatbox-ellipses-outline', title: 'Communication' },
     { path: '/School/timetable', icon: 'time-outline', title: 'Timetable' },
     { path: '/School/student-tracking', icon: 'walk-outline', title: 'Student Tracking' },
@@ -371,6 +373,7 @@ function School() {
             <Route path="administration" element={<Administration />} />
             <Route path="announcement" element={<Announcement />} />
             <Route path="event" element={<Event />} />
+            <Route path="exam-management" element={<ExamManagement />} />
             <Route path="leave-management" element={<LeaveManagement />} />   
             <Route path="communication" element={<Communication />} />
             <Route path="timetable" element={<TimeTable />} />

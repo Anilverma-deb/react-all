@@ -644,7 +644,7 @@ th {
 /* Action Buttons */
 
 .add-btn {
-    background: #3498db;
+    background: #3498db !important;
     color: white;
     border: none;
     padding: 8px 12px;
