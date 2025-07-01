@@ -1128,8 +1128,8 @@ const ExamManagementDashboard = () => {
       </main>
 
       {showModal && (
-        <div className="modal-overlay">
-          <div className="modal">
+        <div className="" id="modal-overlay">
+          <div className="" id="model">
             <button className="modal-close" onClick={() => {
               setShowModal(false);
               resetForm();

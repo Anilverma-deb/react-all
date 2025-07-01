@@ -434,7 +434,7 @@
     color: #2563eb;
   }
   
-  .modal-overlay {
+  #modal-overlay {
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.6);
@@ -445,7 +445,7 @@
     backdrop-filter: blur(4px);
   }
   
-  .modal {
+  #model {
     background: white;
     border-radius: 16px;
     padding: 2rem;
@@ -458,7 +458,7 @@
     animation: slideUp 0.3s ease;
   }
   
-  @keyframes slideUp {
+  /* @keyframes slideUp {
     from {
       opacity: 0;
       transform: translateY(20px);
@@ -519,7 +519,7 @@
     display: flex;
     gap: 1rem;
     margin-top: 2rem;
-  }
+  } */
   
   .table-container {
     overflow-x: auto;
@@ -738,7 +738,8 @@
 
   /* Additional styles for modal close button */
 .modal-close {
-    position: absolute;
+    position: static;
+    float:right;
     top: 1rem;
     right: 1rem;
     background: none;
@@ -746,6 +747,8 @@
     cursor: pointer;
     color: #718096;
     transition: all 0.3s ease;
+    padding: 18px;
+    margin-top:18px;
   }
   
   .modal-close:hover {

@@ -9,6 +9,7 @@ import Event from './School/Event/Event'
 import LeaveManagement from './School/Leave-Management/LeaveManagement';  // Based on your folder structure
 import Announcement from './School/Announcement/Announcement'
 import ExamManagement from './School/Exam-Management/Exam-Management'
+import EmployeeManagement from './School/Account-Management/Acoount-Management'
 
 
 // const Administration = () => <div className="page-content">Administration Component</div>;
@@ -16,13 +17,13 @@ import ExamManagement from './School/Exam-Management/Exam-Management'
 // const Event = () => <div className="page-content">Event Component</div>;
 const Communication = () => <div className="page-content">Communication Component</div>;
 // const ExamManagement = () => <div className="page-content">ExamManagement Component</div>;
-
+// 
 // const LeaveManagement = () => <div className="page-content">Leave Management Component</div>;
 
 // const TimeTable = () => <div className="page-content">Time Table Component</div>;
 const StudentTracking = () => <div className="page-content">Student Tracking Component</div>;
  const Transport = () => <div className="page-content">Transport Component</div>;
-const EmployeeManagement = () => <div className="page-content">Employee Management Component</div>;
+// const EmployeeManagement = () => <div className="page-content">Employee Management Component</div>;
 
 function School() {
 
