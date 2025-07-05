@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Routes, Route, NavLink, Navigate } from 'react-router-dom';
 import '../assets/css/School.css';
 import Dashboard from './School/Dashbord/Dashboard';
-import Feemanagement from './School/Fee-management/fee-management';
+import Reportmanagement from './School/Report-management/Report-Management';
 import Administration from './School/Administration/Administration';
 import TimeTable from './School/Time-table/Time-Table';
 import Event from './School/Event/Event'
@@ -10,19 +10,42 @@ import LeaveManagement from './School/Leave-Management/LeaveManagement';  // Bas
 import Announcement from './School/Announcement/Announcement'
 import ExamManagement from './School/Exam-Management/Exam-Management'
 import EmployeeManagement from './School/Account-Management/Acoount-Management'
+import Transport from './School/Transport-Management/Transport'
+import TaskManagement from './School/Task-Management/Task-Management'
+import Cctv from './School/Cctv-Management/Cctv-Management'
+import LibraryManagement from './School/Library-Management/Library-Management'
+import Attendance from './School/Attendance/Attendance';
+import Result from './School/Result/Result';
+import Track from './School/Track/Track';
+import Session from './School/Session/Session';
+
+
+
+
+
+
 
 
 // const Administration = () => <div className="page-content">Administration Component</div>;
 // const Announcement = () => <div className="page-content">Announcement Component</div>;
 // const Event = () => <div className="page-content">Event Component</div>;
 const Communication = () => <div className="page-content">Communication Component</div>;
+// const Cctv = () => <div className="page-content">Cctv Component</div>;
+// const LibraryManagement = () => <div className="page-content">Library Management Component</div>;
+// const Result = () => <div className="page-content">Result Component</div>;
+// const Attendance = () => <div className="page-content">Attendance Component</div>;
+// const Session = () => <div className="page-content">Session Component</div>;
+
+
 // const ExamManagement = () => <div className="page-content">ExamManagement Component</div>;
 // 
 // const LeaveManagement = () => <div className="page-content">Leave Management Component</div>;
 
 // const TimeTable = () => <div className="page-content">Time Table Component</div>;
-const StudentTracking = () => <div className="page-content">Student Tracking Component</div>;
- const Transport = () => <div className="page-content">Transport Component</div>;
+// const StudentTracking = () => <div className="page-content">Student Tracking Component</div>;
+//  const Transport = () => <div className="page-content">Transport Component</div>;
+// const TaskManagement = () => <div className="page-content">Task Management Component</div>;
+
 // const EmployeeManagement = () => <div className="page-content">Employee Management Component</div>;
 
 function School() {
@@ -135,12 +158,25 @@ function School() {
     { path: '/School/announcement', icon: 'megaphone-outline', title: 'Announcement' },
     { path: '/School/event', icon: 'calendar-outline', title: 'Events' },
     { path: '/School/leave-management', icon: 'home-outline', title: 'Leave Management' },
-    { path: '/School/exam-management', icon: 'chatbox-ellipses-outline', title: 'Exam Management' },
+    { path: '/School/exam-management', icon: 'card-outline', title: 'Exam Management' },
     { path: '/School/communication', icon: 'chatbox-ellipses-outline', title: 'Communication' },
+    { path: '/School/result', icon: 'chatbox-ellipses-outline', title: 'Result' },
+    { path: '/School/attendance', icon: 'chatbox-ellipses-outline', title: 'Attendance' },
+
+
+    { path: '/School/cctv', icon: 'people-outline', title: 'CCTV' },
+    { path: '/School/library-Management', icon: 'megaphone-outline', title: 'Library Management' },
+
+
     { path: '/School/timetable', icon: 'time-outline', title: 'Timetable' },
-    { path: '/School/student-tracking', icon: 'walk-outline', title: 'Student Tracking' },
+    { path: '/School/track', icon: 'walk-outline', title: 'Track' },
+
     { path: '/School/transport', icon: 'bus-outline', title: 'Transport' },
-    { path: '/School/fee-management', icon: 'card-outline', title: 'Fee Management' },
+    { path: '/School/task-management', icon: 'walk-outline', title: 'Task Management' },
+    { path: '/School/session', icon: 'walk-outline', title: 'Session' },
+
+
+    { path: '/School/Report-management', icon: 'card-outline', title: 'Report Management' },
     { path: '/School/employee', icon: 'person-outline', title: 'Employee Management' }
   ];
  useEffect(() => {
@@ -377,10 +413,20 @@ function School() {
             <Route path="exam-management" element={<ExamManagement />} />
             <Route path="leave-management" element={<LeaveManagement />} />   
             <Route path="communication" element={<Communication />} />
+            <Route path="result" element={<Result />} />
+            <Route path="attendance" element={<Attendance />} />
+
+            <Route path="cctv" element={<Cctv />} />
+            <Route path="library-management" element={<LibraryManagement />} />
+
+            <Route path="track" element={<Track />} />
+
             <Route path="timetable" element={<TimeTable />} />
-            <Route path="student-tracking" element={<StudentTracking />} />
+            <Route path="session" element={<Session />} />
+            <Route path="task-management" element={<TaskManagement />} />
+
             <Route path="transport" element={<Transport />} />
-            <Route path="fee-management" element={<Feemanagement />} />
+            <Route path="Report-management" element={<Reportmanagement />} />
             <Route path="employee" element={<EmployeeManagement />} />
             <Route path="*" element={<Navigate to="/School/dashboard" replace />} />
           </Routes>

@@ -1,0 +1,471 @@
+.attendance-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f8fafc;
+    min-height: 100vh;
+}
+
+.attendance-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-content h1 {
+    margin: 0 0 8px 0;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.header-content p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 16px;
+}
+
+.header-icon {
+    display: inline-block;
+    margin-right: 12px;
+    vertical-align: middle;
+}
+
+.date-display {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+}
+
+.category-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.category-tab {
+    background: white;
+    border: 2px solid #e2e8f0;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.category-tab:hover {
+    border-color: #667eea;
+    transform: translateY(-1px);
+}
+
+.category-tab.active {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+}
+
+.category-count {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.attendance-form {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.attendance-form h2 {
+    margin: 0 0 20px 0;
+    color: #1a202c;
+    font-size: 24px;
+}
+
+.teachers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.teacher-card {
+    border: 2px solid #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.teacher-card:hover {
+    border-color: #cbd5e0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.teacher-info h4 {
+    margin: 0 0 4px 0;
+    color: #2d3748;
+    font-size: 18px;
+}
+
+.teacher-info p {
+    margin: 0 0 8px 0;
+    color: #718096;
+    font-size: 14px;
+}
+
+.category-badge {
+    background: #edf2f7;
+    color: #4a5568;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status-controls {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.radio-option input[type="radio"] {
+    display: none;
+}
+
+.radio-custom {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #cbd5e0;
+    border-radius: 50%;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.radio-custom.present {
+    border-color: #48bb78;
+}
+
+.radio-custom.absent {
+    border-color: #f56565;
+}
+
+.radio-option input[type="radio"]:checked+.radio-custom::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.radio-option input[type="radio"]:checked+.radio-custom.present {
+    background: #48bb78;
+    border-color: #48bb78;
+    color: white;
+}
+
+.radio-option input[type="radio"]:checked+.radio-custom.absent {
+    background: #f56565;
+    border-color: #f56565;
+    color: white;
+}
+
+.submit-btn {
+    background: linear-gradient(135deg, #48bb78, #38a169);
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    margin: 0 auto;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(72, 187, 120, 0.3);
+}
+
+.submitted-attendance {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.attendance-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.stat-card {
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    border: 2px solid transparent;
+}
+
+.stat-card.total {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+.stat-card.present {
+    background: linear-gradient(135deg, #48bb78, #38a169);
+    color: white;
+}
+
+.stat-card.absent {
+    background: linear-gradient(135deg, #f56565, #e53e3e);
+    color: white;
+}
+
+.stat-card h3 {
+    margin: 0 0 8px 0;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.stat-card p {
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.filter-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-select {
+    padding: 8px 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 14px;
+    background: white;
+    cursor: pointer;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.reset-btn {
+    background: #f7fafc;
+    color: #4a5568;
+    border: 2px solid #e2e8f0;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.reset-btn:hover {
+    background: #edf2f7;
+    border-color: #cbd5e0;
+}
+
+.attendance-list h2 {
+    margin: 0 0 20px 0;
+    color: #1a202c;
+    font-size: 24px;
+}
+
+.attendance-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    transition: all 0.2s ease;
+}
+
+.attendance-item:hover {
+    border-color: #cbd5e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.teacher-details h4 {
+    margin: 0 0 4px 0;
+    color: #2d3748;
+    font-size: 16px;
+}
+
+.teacher-details p {
+    margin: 0;
+    color: #718096;
+    font-size: 14px;
+}
+
+.status-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.status-display {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-badge.status-present {
+    background: #c6f6d5;
+    color: #22543d;
+}
+
+.status-badge.status-absent {
+    background: #fed7d7;
+    color: #742a2a;
+}
+
+.edit-btn {
+    background: none;
+    border: none;
+    color: #718096;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.edit-btn:hover {
+    background: #edf2f7;
+    color: #4a5568;
+}
+
+.edit-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.status-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.status-btn.present {
+    background: #48bb78;
+    color: white;
+}
+
+.status-btn.absent {
+    background: #f56565;
+    color: white;
+}
+
+.status-btn:hover {
+    transform: translateY(-1px);
+}
+
+.cancel-btn {
+    background: none;
+    border: none;
+    color: #718096;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.cancel-btn:hover {
+    background: #edf2f7;
+}
+
+
+/* Mobile Responsiveness */
+
+@media (max-width: 768px) {
+    .attendance-container {
+        padding: 16px;
+    }
+    .attendance-header {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+    }
+    .teachers-grid {
+        grid-template-columns: 1fr;
+    }
+    .attendance-stats {
+        grid-template-columns: 1fr;
+    }
+    .filter-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .attendance-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .status-section {
+        align-self: flex-end;
+    }
+    .category-tabs {
+        flex-direction: column;
+    }
+    .category-tab {
+        justify-content: center;
+    }
+}

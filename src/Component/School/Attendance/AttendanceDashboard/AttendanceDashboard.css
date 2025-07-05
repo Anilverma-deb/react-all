@@ -1,0 +1,690 @@
+
+:root {
+    --primary: #3498db;
+    --primary-light: #5dade2;
+    --secondary: #2ecc71;
+    --secondary-light: #58d68d;
+    --danger: #e74c3c;
+    --danger-light: #ec7063;
+    --warning: #f39c12;
+    --warning-light: #f5b041;
+    --dark: #2c3e50;
+    --dark-light: #34495e;
+    --light: #ecf0f1;
+    --lighter: #f8f9fa;
+    --gray: #95a5a6;
+    --white: #ffffff;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 15px 25px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+    line-height: 1.6;
+    color: var(--dark);
+    background-color: #f5f7fa;
+}
+
+.dashboard-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+
+/* Header */
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.dashboard-title {
+    font-size: 1.8rem;
+    color: var(--dark);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.dashboard-title i {
+    color: var(--primary);
+}
+
+.dashboard-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.import-wrapper {
+    position: relative;
+}
+
+.import-btn,
+.export-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.import-btn {
+    background-color: var(--light);
+    color: var(--dark);
+}
+
+.import-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.export-dropdown {
+    position: relative;
+}
+
+.export-btn {
+    background-color: var(--primary);
+    color: white;
+    padding-right: 1.5rem;
+}
+
+.export-btn.highlight {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(52, 152, 219, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+    }
+}
+
+.export-btn:hover {
+    background-color: var(--primary-light);
+}
+
+.export-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--white);
+    border-radius: 6px;
+    box-shadow: var(--shadow-lg);
+    padding: 0.5rem 0;
+    min-width: 180px;
+    z-index: 10;
+    display: none;
+}
+
+.export-dropdown:hover .export-menu {
+    display: block;
+}
+
+.export-menu button {
+    width: 100%;
+    text-align: left;
+    padding: 0.6rem 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: var(--dark);
+    font-size: 0.9rem;
+}
+
+.export-menu button:hover {
+    background-color: var(--lighter);
+}
+
+.export-menu button i {
+    width: 20px;
+    text-align: center;
+}
+
+
+/* Summary Cards */
+
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.summary-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.summary-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.summary-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+}
+
+.summary-card.student::before {
+    background-color: var(--primary);
+}
+
+.summary-card.staff::before {
+    background-color: var(--warning);
+}
+
+.summary-card.driver::before {
+    background-color: var(--secondary);
+}
+
+.card-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: white;
+    flex-shrink: 0;
+}
+
+.summary-card.student .card-icon {
+    background-color: var(--primary);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+.summary-card.staff .card-icon {
+    background-color: var(--warning);
+    box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3);
+}
+
+.summary-card.driver .card-icon {
+    background-color: var(--secondary);
+    box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+}
+
+.card-content {
+    flex: 1;
+}
+
+.card-content h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--dark);
+}
+
+.card-stats {
+    display: flex;
+    gap: 1rem;
+}
+
+.stat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0.8rem;
+    border-radius: 8px;
+}
+
+.stat-value {
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-bottom: 0.3rem;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 3px;
+}
+
+.stat.present {
+    background-color: rgba(46, 204, 113, 0.1);
+    color: var(--secondary);
+}
+
+.stat.present .progress-fill {
+    background-color: var(--secondary);
+}
+
+.stat.absent {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: var(--danger);
+}
+
+.stat.leave {
+    background-color: rgba(241, 196, 15, 0.1);
+    color: var(--warning);
+}
+
+
+/* Chart Section */
+
+.chart-section {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.section-header h2 {
+    font-size: 1.4rem;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.section-header h2 i {
+    color: var(--primary);
+}
+
+.chart-legend {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+}
+
+.legend-item.student .legend-color {
+    background-color: var(--primary);
+}
+
+.legend-item.staff .legend-color {
+    background-color: var(--warning);
+}
+
+.chart-container {
+    height: 350px;
+    width: 100%;
+    position: relative;
+}
+
+
+/* Data Section */
+
+.data-section {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-end;
+    margin-bottom: 1.5rem;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.filter-group label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--dark-light);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filter-group label i {
+    font-size: 0.9rem;
+    color: var(--primary);
+}
+
+.filter-group select,
+.date-input {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    min-width: 180px;
+    background-color: var(--white);
+    transition: var(--transition);
+}
+
+.filter-group select:focus,
+.date-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.date-filter {
+    min-width: 280px;
+}
+
+.date-inputs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.date-input {
+    flex: 1;
+    min-width: 120px;
+}
+
+.reset-filters {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    background-color: var(--light);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.reset-filters:hover {
+    background-color: #e0e0e0;
+}
+
+
+/* Table */
+
+.table-container {
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+th {
+    background-color: var(--lighter);
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: var(--dark);
+    border-bottom: 2px solid #eee;
+    white-space: nowrap;
+}
+
+td {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    white-space: nowrap;
+}
+
+tr:hover {
+    background-color: var(--lighter);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.user-name {
+    font-weight: 500;
+}
+
+.role-badge,
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.role-badge.student {
+    background-color: rgba(52, 152, 219, 0.1);
+    color: var(--primary);
+}
+
+.role-badge.teacher {
+    background-color: rgba(241, 196, 15, 0.1);
+    color: var(--warning);
+}
+
+.role-badge.driver {
+    background-color: rgba(46, 204, 113, 0.1);
+    color: var(--secondary);
+}
+
+.status-badge.present {
+    background-color: rgba(46, 204, 113, 0.1);
+    color: var(--secondary);
+}
+
+.status-badge.absent {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: var(--danger);
+}
+
+.status-badge.leave {
+    background-color: rgba(241, 196, 15, 0.1);
+    color: var(--warning);
+}
+
+.no-results {
+    padding: 3rem;
+    text-align: center;
+    color: var(--gray);
+}
+
+.no-results i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #ddd;
+}
+
+.no-results p {
+    font-size: 1rem;
+}
+
+
+/* Pagination */
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.pagination button {
+    padding: 0.6rem 1.2rem;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+}
+
+.pagination button:disabled {
+    background-color: var(--gray);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.pagination button:not(:disabled):hover {
+    background-color: var(--primary-light);
+}
+
+.page-info {
+    font-size: 0.9rem;
+    color: var(--dark-light);
+}
+
+
+/* Responsive Design */
+
+@media (max-width: 1200px) {
+    .summary-cards {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 992px) {
+    .filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .filter-group {
+        width: 100%;
+    }
+    .filter-group select,
+    .date-input {
+        width: 100%;
+    }
+    .date-filter {
+        min-width: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .summary-cards {
+        grid-template-columns: 1fr;
+    }
+    .card-stats {
+        flex-direction: column;
+    }
+    .stat {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .progress-bar {
+        width: 60%;
+    }
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .chart-legend {
+        width: 100%;
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 576px) {
+    .dashboard-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .dashboard-actions {
+        flex-direction: column;
+    }
+    .export-dropdown {
+        width: 100%;
+    }
+    .export-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    .export-menu {
+        width: 100%;
+    }
+    .pagination {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .pagination button {
+        width: 100%;
+        justify-content: center;
+    }
+    .date-inputs {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .date-input {
+        width: 100%;
+    }
+}

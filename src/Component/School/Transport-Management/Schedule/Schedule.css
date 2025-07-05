@@ -1,0 +1,673 @@
+
+/* Base Styles */
+
+.bus-schedule-manager {
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    color: #2d3748;
+    background-color: #f8fafc;
+}
+
+
+/* Header Styles */
+
+.bus-schedule-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.bus-schedule-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin: 0;
+}
+
+.bus-schedule-search {
+    position: relative;
+    min-width: 250px;
+}
+
+.bus-schedule-search-input {
+    width: 100%;
+    padding: 10px 15px 10px 35px;
+    border: 1px solid #cbd5e0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.bus-schedule-search-input:focus {
+    outline: none;
+    border-color: #4299e1;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+}
+
+.bus-schedule-search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #718096;
+}
+
+
+/* View Toggle */
+
+.bus-schedule-view-toggle {
+    display: flex;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #edf2f7;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.bus-schedule-view-btn {
+    flex: 1;
+    padding: 12px 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: #4a5568;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s;
+}
+
+.bus-schedule-view-btn:hover {
+    background-color: #e2e8f0;
+    color: #2d3748;
+}
+
+.bus-schedule-view-active {
+    background-color: #4299e1;
+    color: white;
+}
+
+.bus-schedule-view-active:hover {
+    background-color: #3182ce;
+    color: white;
+}
+
+.bus-schedule-view-icon {
+    font-size: 16px;
+}
+
+
+/* Form Styles */
+
+.bus-schedule-form-container {
+    margin-bottom: 30px;
+}
+
+.bus-schedule-form-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s;
+}
+
+.bus-schedule-form-editing {
+    border-left: 4px solid #4299e1;
+}
+
+.bus-schedule-form-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #2d3748;
+}
+
+.bus-schedule-form {
+    width: 100%;
+}
+
+.bus-schedule-form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.bus-schedule-form-group {
+    margin-bottom: 0;
+}
+
+.bus-schedule-form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #4a5568;
+}
+
+.bus-schedule-form-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cbd5e0;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.3s;
+    background-color: white;
+}
+
+.bus-schedule-form-select:focus {
+    outline: none;
+    border-color: #4299e1;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+}
+
+.bus-schedule-form-checkbox {
+    display: flex;
+    align-items: center;
+    grid-column: 1 / -1;
+}
+
+.bus-schedule-form-checkbox label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 0;
+}
+
+.bus-schedule-form-checkbox-input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.bus-schedule-form-checkbox-custom {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: white;
+    border: 1px solid #cbd5e0;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.bus-schedule-form-checkbox-input:checked~.bus-schedule-form-checkbox-custom {
+    background-color: #4299e1;
+    border-color: #4299e1;
+}
+
+.bus-schedule-form-checkbox-custom:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.bus-schedule-form-checkbox-input:checked~.bus-schedule-form-checkbox-custom:after {
+    display: block;
+}
+
+.bus-schedule-form-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.bus-schedule-form-submit {
+    background-color: #4299e1;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.bus-schedule-form-submit:hover {
+    background-color: #3182ce;
+}
+
+.bus-schedule-form-cancel {
+    background-color: #e2e8f0;
+    color: #4a5568;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.bus-schedule-form-cancel:hover {
+    background-color: #cbd5e0;
+}
+
+
+/* Conflicts Styles */
+
+.bus-schedule-conflicts {
+    background-color: #fff5f5;
+    border-left: 4px solid #f56565;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 25px;
+}
+
+.bus-schedule-conflicts-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.bus-schedule-conflicts-icon {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.bus-schedule-conflicts-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+    color: #c53030;
+}
+
+.bus-schedule-conflicts-list {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.bus-schedule-conflict-item {
+    font-size: 14px;
+    color: #9b2c2c;
+    margin-bottom: 5px;
+}
+
+
+/* Weekly View Styles */
+
+.bus-schedule-weekly-view {
+    margin-bottom: 30px;
+}
+
+.bus-schedule-view-heading {
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #2d3748;
+}
+
+.bus-schedule-grid {
+    display: grid;
+    grid-template-columns: 100px repeat(7, 1fr);
+    gap: 10px;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.bus-schedule-grid-header {
+    display: contents;
+}
+
+.bus-schedule-time-header {
+    grid-column: 1;
+    background-color: #2b6cb0;
+    color: white;
+    padding: 15px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.bus-schedule-day-header {
+    background-color: #2b6cb0;
+    color: white;
+    padding: 15px;
+    font-weight: 600;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.bus-schedule-day-name {
+    font-size: 14px;
+}
+
+.bus-schedule-grid-row {
+    display: contents;
+}
+
+.bus-schedule-time-cell {
+    background-color: #ebf8ff;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    color: #2b6cb0;
+}
+
+.bus-schedule-time-label {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+}
+
+.bus-schedule-day-cell {
+    background-color: #f7fafc;
+    min-height: 120px;
+    border: 1px solid #e2e8f0;
+    padding: 5px;
+    transition: all 0.3s;
+}
+
+.bus-schedule-day-cell-dragging {
+    background-color: #ebf8ff;
+    border: 1px dashed #4299e1;
+}
+
+.bus-schedule-item {
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 5px;
+    cursor: grab;
+    transition: all 0.3s;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.bus-schedule-item:active {
+    cursor: grabbing;
+}
+
+.bus-schedule-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.bus-schedule-item-conflict {
+    border-left: 3px solid #f56565;
+    background-color: #fff5f5;
+}
+
+.bus-schedule-item-content {
+    font-size: 13px;
+}
+
+.bus-schedule-item-driver,
+.bus-schedule-item-bus,
+.bus-schedule-item-route,
+.bus-schedule-item-recurring {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.bus-schedule-item-icon {
+    margin-right: 5px;
+    font-size: 12px;
+}
+
+.bus-schedule-item-actions {
+    display: flex;
+    gap: 5px;
+    margin-top: 8px;
+}
+
+.bus-schedule-item-edit,
+.bus-schedule-item-delete {
+    flex: 1;
+    padding: 4px 8px;
+    font-size: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.bus-schedule-item-edit {
+    background-color: #ebf8ff;
+    color: #3182ce;
+}
+
+.bus-schedule-item-edit:hover {
+    background-color: #bee3f8;
+}
+
+.bus-schedule-item-delete {
+    background-color: #fff5f5;
+    color: #e53e3e;
+}
+
+.bus-schedule-item-delete:hover {
+    background-color: #fed7d7;
+}
+
+
+/* List View Styles */
+
+.bus-schedule-list-view {
+    margin-bottom: 30px;
+}
+
+.bus-schedule-empty {
+    background-color: white;
+    border-radius: 10px;
+    padding: 40px 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.bus-schedule-empty-message {
+    color: #718096;
+    margin: 0;
+}
+
+.bus-schedule-table-container {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.bus-schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.bus-schedule-table-head {
+    background-color: #2b6cb0;
+    color: white;
+}
+
+.bus-schedule-table-head th {
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.bus-schedule-table-body tr {
+    border-bottom: 1px solid #e2e8f0;
+    transition: all 0.3s;
+}
+
+.bus-schedule-table-body tr:last-child {
+    border-bottom: none;
+}
+
+.bus-schedule-table-body tr:hover {
+    background-color: #f7fafc;
+}
+
+.bus-schedule-table-row-conflict {
+    background-color: #fff5f5;
+}
+
+.bus-schedule-table-row-conflict:hover {
+    background-color: #fed7d7;
+}
+
+.bus-schedule-table-body td {
+    padding: 12px 15px;
+    font-size: 14px;
+}
+
+.bus-schedule-table-driver,
+.bus-schedule-table-bus,
+.bus-schedule-table-route {
+    display: flex;
+    align-items: center;
+}
+
+.bus-schedule-table-icon {
+    margin-right: 8px;
+    font-size: 14px;
+}
+
+.bus-schedule-table-recurring {
+    color: #38a169;
+    font-weight: 500;
+}
+
+.bus-schedule-table-not-recurring {
+    color: #718096;
+}
+
+.bus-schedule-table-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.bus-schedule-table-edit,
+.bus-schedule-table-delete {
+    padding: 6px 12px;
+    font-size: 13px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.bus-schedule-table-edit {
+    background-color: #ebf8ff;
+    color: #3182ce;
+}
+
+.bus-schedule-table-edit:hover {
+    background-color: #bee3f8;
+}
+
+.bus-schedule-table-delete {
+    background-color: #fff5f5;
+    color: #e53e3e;
+}
+
+.bus-schedule-table-delete:hover {
+    background-color: #fed7d7;
+}
+
+
+/* Responsive Styles */
+
+@media (max-width: 1024px) {
+    .bus-schedule-form-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+    .bus-schedule-grid {
+        grid-template-columns: 80px repeat(7, minmax(120px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .bus-schedule-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .bus-schedule-search {
+        width: 100%;
+    }
+    .bus-schedule-form-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .bus-schedule-grid {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    .bus-schedule-grid-header {
+        display: flex;
+    }
+    .bus-schedule-time-header,
+    .bus-schedule-day-header {
+        min-width: 120px;
+        display: inline-flex;
+    }
+    .bus-schedule-grid-row {
+        display: flex;
+    }
+    .bus-schedule-time-cell,
+    .bus-schedule-day-cell {
+        min-width: 120px;
+        min-height: 80px;
+        display: inline-flex;
+    }
+    .bus-schedule-time-label {
+        writing-mode: horizontal-tb;
+        transform: none;
+    }
+    .bus-schedule-table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .bus-schedule-form-grid {
+        grid-template-columns: 1fr;
+    }
+    .bus-schedule-view-toggle {
+        flex-direction: column;
+    }
+    .bus-schedule-view-btn {
+        padding: 10px;
+    }
+    .bus-schedule-form-actions {
+        flex-direction: column;
+    }
+    .bus-schedule-form-submit,
+    .bus-schedule-form-cancel {
+        width: 100%;
+    }
+    .bus-schedule-table-actions {
+        flex-direction: column;
+        gap: 5px;
+    }
+    .bus-schedule-table-edit,
+    .bus-schedule-table-delete {
+        width: 100%;
+    }
+}
