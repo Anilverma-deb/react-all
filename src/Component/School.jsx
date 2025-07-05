@@ -192,6 +192,16 @@ function School() {
     <div className="app-container">
       {/* Sidebar Navigation */}
       <div className={`navigation ${isSidebarOpen ? 'active' : ''}`}>
+
+        {/* Add close button for mobile */}
+        <button 
+          className="sidebar-close-btn mobile-only"
+          onClick={() => setIsSidebarOpen(false)}
+        >
+          <iconify-icon icon="ion:close-outline"></iconify-icon>
+        </button>
+
+
         <ul className="nav-list">
           <li className="nav-brand">
             <NavLink to="#" className="nav-link" onClick={(e) => e.preventDefault()}>
