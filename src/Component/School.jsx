@@ -18,6 +18,11 @@ import Attendance from './School/Attendance/Attendance';
 import Result from './School/Result/Result';
 import Track from './School/Track/Track';
 import Session from './School/Session/Session';
+import Communication from './School/Communication/Communication';
+import Hostel from './School/Hostel-Management/Hostel-Management'
+
+
+
 
 
 
@@ -29,7 +34,7 @@ import Session from './School/Session/Session';
 // const Administration = () => <div className="page-content">Administration Component</div>;
 // const Announcement = () => <div className="page-content">Announcement Component</div>;
 // const Event = () => <div className="page-content">Event Component</div>;
-const Communication = () => <div className="page-content">Communication Component</div>;
+// const Communication = () => <div className="page-content">Communication Component</div>;
 // const Cctv = () => <div className="page-content">Cctv Component</div>;
 // const LibraryManagement = () => <div className="page-content">Library Management Component</div>;
 // const Result = () => <div className="page-content">Result Component</div>;
@@ -47,6 +52,7 @@ const Communication = () => <div className="page-content">Communication Componen
 // const TaskManagement = () => <div className="page-content">Task Management Component</div>;
 
 // const EmployeeManagement = () => <div className="page-content">Employee Management Component</div>;
+//  const Hostel = () => <div className="page-content">Hostel Component</div>;
 
 function School() {
 
@@ -176,8 +182,11 @@ function School() {
     { path: '/School/session', icon: 'walk-outline', title: 'Session' },
 
 
+
     { path: '/School/Report-management', icon: 'card-outline', title: 'Report Management' },
-    { path: '/School/employee', icon: 'person-outline', title: 'Employee Management' }
+    { path: '/School/employee', icon: 'person-outline', title: 'Employee Management' },
+    { path: '/School/hostel', icon: 'walk-outline', title: 'Hostel' },
+
   ];
  useEffect(() => {
     const handleScroll = () => {
@@ -439,6 +448,8 @@ function School() {
             <Route path="Report-management" element={<Reportmanagement />} />
             <Route path="employee" element={<EmployeeManagement />} />
             <Route path="*" element={<Navigate to="/School/dashboard" replace />} />
+            <Route path="Hostel" element={<Hostel />} />
+
           </Routes>
         </div>
       </div>
