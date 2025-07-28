@@ -62,6 +62,16 @@ const HostelDashboard = () => {
   });
   const [exportType, setExportType] = useState(null);
   const [notification, setNotification] = useState({ show: false, message: '', type: '' });
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  // Check screen size
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Show notification
   const showNotification = (message, type) => {
@@ -561,7 +571,7 @@ const HostelDashboard = () => {
               className="add-student__btn"
               onClick={handleAddStudent}
             >
-              + Add Student
+              {isMobile ? '+' : '+ Add Student'}
             </button>
           </div>
         </div>
@@ -650,7 +660,7 @@ const HostelDashboard = () => {
                   className="action__btn add"
                   onClick={handleAddRoom}
                 >
-                  + Add Room
+                  {isMobile ? '+' : '+ Add Room'}
                 </button>
                 <div className="export-dropdown">
                   <button 
@@ -756,6 +766,65 @@ const HostelDashboard = () => {
           {filteredStudents.length === 0 ? (
             <div className="empty__state">
               <p>No active students found</p>
+            </div>
+          ) : isMobile ? (
+            <div className="mobile-students-list">
+              {filteredStudents.map(student => (
+                <div key={student.id} className="mobile-student-card">
+                  <div className="student-header">
+                    <div className="avatar">
+                      {student.name.charAt(0).toUpperCase()}
+                    </div>
+                    <div className="student-name">{student.name}</div>
+                  </div>
+                  <div className="student-details">
+                    <div className="detail-row">
+                      <span className="detail-label">Gender:</span>
+                      <span className={`gender__badge ${student.gender.toLowerCase()}`}>
+                        {student.gender === 'Male' ? '♂' : '♀'} {student.gender}
+                      </span>
+                    </div>
+                    <div className="detail-row">
+                      <span className="detail-label">Room:</span>
+                      <span>{student.room}</span>
+                    </div>
+                    <div className="detail-row">
+                      <span className="detail-label">Check-In:</span>
+                      <span>{student.checkIn}</span>
+                    </div>
+                    <div className="detail-row">
+                      <span className="detail-label">Contact:</span>
+                      <span>{student.contact}</span>
+                    </div>
+                    <div className="detail-row">
+                      <span className="detail-label">Fees:</span>
+                      <span className={`fees__badge ${student.feesPaid ? 'paid' : 'unpaid'}`}>
+                        {student.feesPaid ? 'Paid' : 'Unpaid'}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="student-actions">
+                    <button 
+                      className="action__btn edit"
+                      onClick={() => handleEditStudent(student)}
+                    >
+                      Edit
+                    </button>
+                    <button 
+                      className="action__btn checkout"
+                      onClick={() => handleCheckout(student.id)}
+                    >
+                      Checkout
+                    </button>
+                    <button 
+                      className="action__btn delete"
+                      onClick={() => handleDeleteStudent(student.id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
           ) : (
             <div className="students__table">
